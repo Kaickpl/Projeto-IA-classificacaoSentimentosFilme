@@ -1,0 +1,78 @@
+# Ambientes virtuais
+.venv/
+venv/
+env/
+ENV/
+
+# Cache e arquivos compilados do Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribuição e empacotamento
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Testes, cobertura e ferramentas
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+.tox/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# IDEs e editores
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Variáveis de ambiente e arquivos locais
+.env
+.env.*
+!.env.example
+
+# Logs e arquivos temporários
+*.log
+*.tmp
+*.temp
+.cache/
+
+# Datasets: mantenha apenas os marcadores dos diretórios
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Resultados e artefatos gerados: mantenha apenas os marcadores
+results/figures/*
+!results/figures/.gitkeep
+results/metrics/*
+!results/metrics/.gitkeep
+
+# Artefatos comuns de modelos e dados grandes
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.hdf5
+*.onnx
+*.pt
+*.pth
+*.npy
+*.npz
+*.parquet
+*.feather
