@@ -1,20 +1,32 @@
-# Projeto de Inteligência Artificial — Nome Provisório
+# Análise de Sentimento em Avaliações de Filmes
 
-Template educacional para o desenvolvimento de um projeto acadêmico de Machine Learning na disciplina de Inteligência Artificial. Este repositório fornece apenas uma organização inicial: a definição do problema, a análise dos dados, os modelos e os experimentos deverão ser desenvolvidos pela equipe.
+Modelo de classificação que analisa avaliações de filmes escritas por usuários e prevê se a opinião é positiva ou negativa.
 
 ## Equipe
 
-**Nome da equipe:** _preencher_
-
 | Integrante | Conta no GitHub | Responsabilidade inicial |
 | --- | --- | --- |
-| Nome completo | `@usuario` | A definir |
-| Nome completo | `@usuario` | A definir |
-| Nome completo | `@usuario` | A definir |
+| Kaick José Pita de Mendonça Lopes | [`@Kaickpl`](https://github.com/Kaickpl) | Liderança e organização do projeto |
+| Marcelo Arthur | [`@mwrcelin`](https://github.com/mwrcelin) | | A definir |
+| Vinicius Gabriel Santos Bezerra | [`@ViniGS2`](https://github.com/ViniGS2) | | A definir |
+| Glauco Cordeiro Siqueira| [`@Glauco-Siq`](https://github.com/Glauco-Siq) | | A definir |
+| Maria Gabriela Santos Melo| [`@gabigabi210`]([https://github.com/Kaickpl](https://github.com/gabigabi210)) | | A definir |
 
-## Descrição geral
+## Sobre o Projeto
 
-Preencha esta seção com uma visão geral do projeto, incluindo o problema estudado, sua relevância, os objetivos e, quando definido, o conjunto de dados que será utilizado. Não inclua aqui resultados que ainda não tenham sido obtidos ou avaliados pela equipe.
+Todo dia milhares de pessoas escrevem opiniões sobre filmes em sites como IMDb, Letterboxd e Rotten Tomatoes. Ler tudo manualmente é inviável. Este projeto aplica técnicas de Processamento de Linguagem Natural (PLN) e Aprendizado de Máquina para automatizar essa leitura: dado o texto de uma avaliação, o modelo classifica o sentimento expresso pelo autor.
+
+Trata-se de um problema de classificação binária supervisionada. O modelo aprende a partir de um conjunto de avaliações já rotuladas como positivas ou negativas e, depois de treinado, consegue classificar textos que nunca viu antes.
+
+# Base de dados
+
+Fonte: [https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews]
+
+Atributos:
+
+Coluna	Descrição
+review	Texto da avaliação escrita pelo usuário
+sentiment	Rótulo da classe: positivo ou negativo
 
 ## Estrutura do repositório
 
