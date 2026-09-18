@@ -10,7 +10,7 @@ Modelo de classificação que analisa avaliações de filmes escritas por usuár
 | Marcelo Arthur | [`@mwrcelin`](https://github.com/mwrcelin) | | A definir |
 | Vinicius Gabriel Santos Bezerra | [`@ViniGS2`](https://github.com/ViniGS2) | | A definir |
 | Glauco Cordeiro Siqueira| [`@Glauco-Siq`](https://github.com/Glauco-Siq) | | A definir |
-| Maria Gabriela Santos Melo| [`@gabigabi210`]([https://github.com/Kaickpl](https://github.com/gabigabi210)) | | A definir |
+| Maria Gabriela Santos Melo| [`@gabigabi210`](https://github.com/gabigabi210)| | A definir |
 
 ## Sobre o Projeto
 
@@ -24,9 +24,9 @@ Fonte: [https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movi
 
 Atributos:
 
-Coluna	Descrição
-review	Texto da avaliação escrita pelo usuário
-sentiment	Rótulo da classe: positivo ou negativo
+review: Texto da avaliação escrita pelo usuário.
+
+sentimento:	Rótulo da classe: positivo ou negativo
 
 ## Estrutura do repositório
 
