@@ -18,9 +18,17 @@ Todo dia milhares de pessoas escrevem opiniões sobre filmes em sites como IMDb,
 
 Trata-se de um problema de classificação binária supervisionada. O modelo aprende a partir de um conjunto de avaliações já rotuladas como positivas ou negativas e, depois de treinado, consegue classificar textos que nunca viu antes.
 
+Objetivos
+- Construir uma base de dados de avaliações de filmes rotuladas por sentimento
+- Aplicar técnicas de pré-processamento textual (limpeza, tokenização, remoção de stopwords)
+- Representar o texto em formato numérico através de vetorização
+- Treinar e comparar diferentes algoritmos de classificação
+- Avaliar o desempenho dos modelos com métricas apropriadas
+- Identificar qual abordagem oferece o melhor resultado para o problema
+
 # Base de dados
 
-Fonte: [https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews]
+Fonte: https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews
 
 Atributos:
 
