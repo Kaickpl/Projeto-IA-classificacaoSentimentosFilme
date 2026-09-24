@@ -10,7 +10,7 @@ INPUT_FILE = (
     PROJECT_ROOT
     / "data"
     / "processed"
-    / "IMDB_Dataset_normalizado.csv"
+    / "IMDB_Dataset_menor_normalizado.csv"
 )
 
 # Caminho do dataset com os sentimentos codificados
@@ -18,7 +18,7 @@ OUTPUT_FILE = (
     PROJECT_ROOT
     / "data"
     / "processed"
-    / "IMDB_Dataset_encoded.csv"
+    / "IMDB_Dataset_menor_encoded.csv"
 )
 
 
