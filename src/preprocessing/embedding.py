@@ -32,7 +32,7 @@ MODEL_NAME = "all-MiniLM-L6-v2"
 EMBEDDING_DIM = 384
 BATCH_SIZE = 64
 
-## ta carregando a tabela que npo caso é o encodding
+## ta carregando a tabela que no caso é o encodding
 def load_model(model_name: str = MODEL_NAME):
     from sentence_transformers import SentenceTransformer
 
