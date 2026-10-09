@@ -1,0 +1,9 @@
+{
+  "best_params": {
+    "n_oculta": 64,
+    "eta": 0.5
+  },
+  "val_f1_macro": 0.7827903091060986,
+  "test_f1_macro": 0.8099809980998101,
+  "test_accuracy": 0.81
+}
