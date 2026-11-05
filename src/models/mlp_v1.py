@@ -1,8 +1,19 @@
+import sys
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 import joblib
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
+
+# Permite importar os módulos de src/ também ao executar este arquivo diretamente
+SRC_DIR = Path(__file__).resolve().parents[1]
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
+
+# A divisão em treinamento, validação e teste é a mesma para todos os modelos.
+# As proporções são definidas em src/data/split.py.
+from data.split import split_data  # noqa: E402
 
 COLUNA_ROTULO = "sentiment"
 
@@ -103,28 +114,20 @@ def carregar_dados(caminho):
     return X, y
 
 
-def treinar(X_train, y_train):
-    # Separa parte do treino para validação (usada na parada antecipada)
-    X_tr, X_val, y_tr, y_val = train_test_split(
-        X_train, y_train, test_size=0.15, random_state=42, stratify=y_train
-    )
+def treinar(X_train, y_train, X_val, y_val):
+    # O conjunto de validação vem de split_data e é usado na parada antecipada
     modelo = MLP(n_oculta=32, eta=0.5)
-    modelo.fit(X_tr, y_tr, X_val, y_val)
+    modelo.fit(X_train, y_train, X_val, y_val)
     return modelo
 
 
 if __name__ == "__main__":
     # Importa pelo caminho do pacote para o modelo salvo poder ser carregado depois
-    import sys
-    from pathlib import Path
-    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
     from models.mlp_v1 import carregar_dados, treinar
 
     X, y = carregar_dados("data/processed/IMDB_menor_embeddings.csv")
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=42, stratify=y
-    )
-    modelo = treinar(X_train, y_train)
+    X_train, X_val, X_test, y_train, y_val, y_test = split_data(X, y)
+    modelo = treinar(X_train, y_train, X_val, y_val)
     print("Melhor época:", modelo.melhor_epoca)
     print(classification_report(y_test, modelo.predict(X_test)))
     joblib.dump(modelo, "models/mlp_v1.joblib")
