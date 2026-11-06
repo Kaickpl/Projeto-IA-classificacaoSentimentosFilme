@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -10,10 +11,18 @@ from sklearn.metrics import (
     precision_score,
     recall_score,
 )
-from sklearn.model_selection import train_test_split
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+# Permite importar os módulos de src/ também ao executar este arquivo diretamente
+SRC_DIR = PROJECT_ROOT / "src"
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
+
+# A divisão em treinamento, validação e teste é a mesma para todos os modelos.
+# As proporções são definidas em src/data/split.py.
+from data.split import split_data  # noqa: E402
 
 INPUT_FILE = (
     PROJECT_ROOT
@@ -22,7 +31,6 @@ INPUT_FILE = (
     / "IMDB_menor_embeddings.csv"
 )
 
-TEST_SIZE = 0.20
 RANDOM_STATE = 42
 MAX_ITER = 1000
 
@@ -77,47 +85,6 @@ def prepare_data(df: pd.DataFrame):
     y = df["sentiment"]
 
     return X, y
-
-
-def split_data(X, y):
-    """
-    Divide os dados em treinamento, validação e teste.
-
-    Proporção:
-    - 70% treinamento
-    - 15% validação
-    - 15% teste
-    """
-
-    # 70% treinamento
-    # 30% temporário (validação + teste)
-    X_train, X_temp, y_train, y_temp = train_test_split(
-        X,
-        y,
-        test_size=0.30,
-        random_state=RANDOM_STATE,
-        stratify=y,
-    )
-
-    # Divide os 30% temporários em:
-    # 15% validação
-    # 15% teste
-    X_val, X_test, y_val, y_test = train_test_split(
-        X_temp,
-        y_temp,
-        test_size=0.50,
-        random_state=RANDOM_STATE,
-        stratify=y_temp,
-    )
-
-    return (
-        X_train,
-        X_val,
-        X_test,
-        y_train,
-        y_val,
-        y_test,
-    )
 
 
 def create_model(C: float = 1.0) -> LogisticRegression:
