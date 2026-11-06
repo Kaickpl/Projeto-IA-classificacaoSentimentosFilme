@@ -147,10 +147,11 @@ def evaluate_model(model, X_test, y_test):
 
 
 if __name__ == "__main__":
+    import numpy as np
+
     df = load_data(INPUT_FILE)
 
     print("Formato do dataset:", df.shape)
-
     print("\nDistribuição das classes:")
     print(df["sentiment"].value_counts().sort_index())
 
@@ -159,51 +160,47 @@ if __name__ == "__main__":
     print("\nFormato de X:", X.shape)
     print("Formato de y:", y.shape)
 
-    X_train, X_test, y_train, y_test = split_data(X, y)
+    # 1. Divisão em 3 conjuntos
+    X_train, X_val, X_test, y_train, y_val, y_test = split_data(X, y)
 
-    print("\nDados de treinamento:", X_train.shape)
-    print("Dados de teste:", X_test.shape)
+    print("\nTreinamento:", X_train.shape)
+    print("Validação:", X_val.shape)
+    print("Teste:", X_test.shape)
 
-    print("\nDistribuição no treinamento:")
-    print(y_train.value_counts().sort_index())
+    # 2. Busca do melhor hiperparâmetro C no conjunto de validação
+    C_VALUES = np.logspace(-2, 2, 13)
+    best_f1 = -1.0
+    best_C = 1.0
 
-    print("\nDistribuição no teste:")
-    print(y_test.value_counts().sort_index())
+    for C in C_VALUES:
+        model = create_model(C=C)
+        train_model(model, X_train, y_train)
+        metrics, _, _ = evaluate_model(model, X_val, y_val)
 
-    model = create_model()
+        if metrics["f1"] > best_f1:
+            best_f1 = metrics["f1"]
+            best_C = C
 
-    train_model(
-        model,
-        X_train,
-        y_train,
-    )
+    print(f"\nMelhor C encontrado na validação: {best_C} (F1-score: {best_f1:.4f})")
 
-    metrics, y_pred, y_proba = evaluate_model(
-        model,
-        X_test,
-        y_test,
-    )
+    # 3. Treinamento do modelo final (Treino + Validação)
+    X_train_final = pd.concat([X_train, X_val], axis=0)
+    y_train_final = pd.concat([y_train, y_val], axis=0)
 
-    print("\n=== RESULTADOS ===")
+    final_model = create_model(C=float(best_C))
+    train_model(final_model, X_train_final, y_train_final)
 
-    print(
-        f"Acurácia:  {metrics['accuracy']:.4f}"
-    )
+    # 4. Avaliação final no conjunto de teste
+    test_metrics, y_pred, y_proba = evaluate_model(final_model, X_test, y_test)
 
-    print(
-        f"Precisão:  {metrics['precision']:.4f}"
-    )
-
-    print(
-        f"Recall:    {metrics['recall']:.4f}"
-    )
-
-    print(
-        f"F1-score:  {metrics['f1']:.4f}"
-    )
+    print("\n=== RESULTADO FINAL NO TESTE ===")
+    print(f"Acurácia:  {test_metrics['accuracy']:.4f}")
+    print(f"Precisão:  {test_metrics['precision']:.4f}")
+    print(f"Recall:    {test_metrics['recall']:.4f}")
+    print(f"F1-score:  {test_metrics['f1']:.4f}")
 
     print("\nMatriz de confusão:")
-    print(metrics["confusion_matrix"])
+    print(test_metrics["confusion_matrix"])
 
     print("\nRelatório de classificação:")
-    print(metrics["classification_report"])
+    print(test_metrics["classification_report"])
